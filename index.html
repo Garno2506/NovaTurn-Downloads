@@ -106,47 +106,22 @@
 </style>
 
 <script>
-// Load download counter
+// Load counter from countapi.xyz
 async function loadCounter() {
     try {
-        const response = await fetch("counter.json");
+        const response = await fetch("https://api.countapi.xyz/get/novaturn/downloads");
         const data = await response.json();
         document.getElementById("counter").innerText =
-            "Total Downloads: " + data.downloads;
+            "Total Downloads: " + data.value;
     } catch (e) {
-        console.error("Counter load failed", e);
+        document.getElementById("counter").innerText = "Total Downloads: unavailable";
     }
 }
 
 // Increment counter when download button is clicked
 async function incrementDownloadCounter() {
-    const repo = "Garno2506/NovaTurn-Downloads";
-    const file = "counter.json";
-
     try {
-        const url = `https://api.github.com/repos/${repo}/contents/${file}`;
-        const response = await fetch(url);
-        const data = await response.json();
-
-        const content = atob(data.content);
-        const json = JSON.parse(content);
-
-        json.downloads++;
-
-        const updatedContent = btoa(JSON.stringify(json, null, 2));
-
-        await fetch(url, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                message: "Increment download counter",
-                content: updatedContent,
-                sha: data.sha
-            })
-        });
-
+        await fetch("https://api.countapi.xyz/hit/novaturn/downloads");
         loadCounter();
     } catch (e) {
         console.error("Counter update failed", e);
@@ -204,6 +179,10 @@ window.onload = loadCounter;
 <footer>
     © 2026 NovaTurn Media Player — All Rights Reserved
 </footer>
+
+</body>
+</html>
+
 
 </body>
 </html>
