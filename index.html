@@ -21,6 +21,12 @@
         padding: 20px;
     }
 
+    img.logo {
+        width: 180px;
+        margin-bottom: 25px;
+        filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.4));
+    }
+
     h1 {
         font-size: 48px;
         margin-bottom: 10px;
@@ -60,6 +66,12 @@
         color: #aaaaaa;
     }
 
+    .counter-box {
+        margin-top: 10px;
+        font-size: 16px;
+        color: #888888;
+    }
+
     .notes {
         margin-top: 60px;
         text-align: left;
@@ -74,29 +86,103 @@
         color: #4CAF50;
     }
 
+    a.changelog-link {
+        display: inline-block;
+        margin-top: 20px;
+        color: #4CAF50;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    a.changelog-link:hover {
+        text-decoration: underline;
+    }
+
     footer {
         margin-top: 80px;
         font-size: 14px;
         color: #555;
     }
 </style>
+
+<script>
+// Load download counter
+async function loadCounter() {
+    try {
+        const response = await fetch("counter.json");
+        const data = await response.json();
+        document.getElementById("counter").innerText =
+            "Total Downloads: " + data.downloads;
+    } catch (e) {
+        console.error("Counter load failed", e);
+    }
+}
+
+// Increment counter when download button is clicked
+async function incrementDownloadCounter() {
+    const repo = "Garno2506/NovaTurn-Downloads";
+    const file = "counter.json";
+
+    try {
+        const url = `https://api.github.com/repos/${repo}/contents/${file}`;
+        const response = await fetch(url);
+        const data = await response.json();
+
+        const content = atob(data.content);
+        const json = JSON.parse(content);
+
+        json.downloads++;
+
+        const updatedContent = btoa(JSON.stringify(json, null, 2));
+
+        await fetch(url, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                message: "Increment download counter",
+                content: updatedContent,
+                sha: data.sha
+            })
+        });
+
+        loadCounter();
+    } catch (e) {
+        console.error("Counter update failed", e);
+    }
+}
+
+window.onload = loadCounter;
+</script>
+
 </head>
 
 <body>
 
 <div class="container">
 
+    <!-- LOGO -->
+    <img src="logo.png" class="logo" alt="NovaTurn Logo">
+
     <h1>NovaTurn Media Player</h1>
     <h2>Premium Audio & Video Experience</h2>
 
     <!-- DOWNLOAD BUTTON -->
-    <a class="download-btn" href="https://github.com/Garno2506/NovaTurn/releases/download/v1.0.0.100/NovaTurnSetup-1.0.0.100.exe">
+    <a class="download-btn"
+       href="https://github.com/Garno2506/NovaTurn/releases/download/v1.0.0.100/NovaTurnSetup-1.0.0.100.exe"
+       onclick="incrementDownloadCounter()">
         Download NovaTurn
     </a>
 
     <!-- VERSION DISPLAY -->
     <div class="version-box">
         Latest Version: <strong>1.0.0.100</strong>
+    </div>
+
+    <!-- DOWNLOAD COUNTER -->
+    <div id="counter" class="counter-box">
+        Total Downloads: loading...
     </div>
 
     <!-- RELEASE NOTES -->
@@ -110,6 +196,9 @@
         </ul>
     </div>
 
+    <!-- CHANGELOG LINK -->
+    <a href="changelog.html" class="changelog-link">View Full Changelog</a>
+
 </div>
 
 <footer>
@@ -118,4 +207,5 @@
 
 </body>
 </html>
+
 
