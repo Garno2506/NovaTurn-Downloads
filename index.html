@@ -1,15 +1,121 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>NovaTurn Download</title>
-  <style>
-    body { font-family: Arial; background: #111; color: #eee; text-align: center; padding: 50px; }
-    a.download { display: inline-block; padding: 15px 25px; background: #4CAF50; color: white; text-decoration: none; border-radius: 8px; font-size: 20px; }
-  </style>
+<meta charset="UTF-8">
+<title>NovaTurn Media Player – Download</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: #0d0d0d;
+        color: #e6e6e6;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 80px auto;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 48px;
+        margin-bottom: 10px;
+        color: #ffffff;
+        letter-spacing: 1px;
+    }
+
+    h2 {
+        font-size: 22px;
+        font-weight: normal;
+        color: #cccccc;
+        margin-top: 0;
+        margin-bottom: 40px;
+    }
+
+    .download-btn {
+        display: inline-block;
+        padding: 18px 40px;
+        font-size: 22px;
+        color: white;
+        background: linear-gradient(135deg, #4CAF50, #2e8b3d);
+        text-decoration: none;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+        transition: 0.2s ease-in-out;
+    }
+
+    .download-btn:hover {
+        background: linear-gradient(135deg, #5edb63, #3fae4f);
+        box-shadow: 0 0 30px rgba(94, 219, 99, 0.7);
+        transform: scale(1.05);
+    }
+
+    .version-box {
+        margin-top: 25px;
+        font-size: 18px;
+        color: #aaaaaa;
+    }
+
+    .notes {
+        margin-top: 60px;
+        text-align: left;
+        background: #1a1a1a;
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid #333;
+    }
+
+    .notes h3 {
+        margin-top: 0;
+        color: #4CAF50;
+    }
+
+    footer {
+        margin-top: 80px;
+        font-size: 14px;
+        color: #555;
+    }
+</style>
 </head>
+
 <body>
-  <h1>NovaTurn Media Player</h1>
-  <p>Download the latest version below.</p>
-  <a class="download" href="NovaTurnSetup.exe">Download NovaTurn</a>
+
+<div class="container">
+
+    <h1>NovaTurn Media Player</h1>
+    <h2>Premium Audio & Video Experience</h2>
+
+    <!-- DOWNLOAD BUTTON -->
+    <a class="download-btn" href="https://github.com/garno2506/NovaTurn/releases/latest/download/NovaTurnSetup.exe">
+        Download NovaTurn
+    </a>
+
+    <!-- VERSION DISPLAY -->
+    <div class="version-box">
+        Latest Version: <strong>1.0.0.98</strong>
+    </div>
+
+    <!-- RELEASE NOTES -->
+    <div class="notes">
+        <h3>Latest Changes</h3>
+        <ul>
+            <li>Improved update system with accurate version detection</li>
+            <li>Enhanced splash screen with embedded version number</li>
+            <li>Stability improvements and performance optimisations</li>
+            <li>General UI polish and refinements</li>
+        </ul>
+    </div>
+
+</div>
+
+<footer>
+    © 2026 NovaTurn Media Player — All Rights Reserved
+</footer>
+
 </body>
 </html>
+
