@@ -119,37 +119,3 @@
 </body>
 </html>
 
-<script>
-async function incrementDownloadCounter() {
-    const repo = "garno2506/NovaTurn-Downloads";
-    const file = "counter.json";
-
-    const token = ""; // optional: only needed if you want authenticated writes
-
-    const url = `https://api.github.com/repos/${repo}/contents/${file}`;
-
-    const response = await fetch(url);
-    const data = await response.json();
-
-    const content = atob(data.content);
-    const json = JSON.parse(content);
-
-    json.downloads++;
-
-    const updatedContent = btoa(JSON.stringify(json, null, 2));
-
-    await fetch(url, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-            ...(token && { "Authorization": `token ${token}` })
-        },
-        body: JSON.stringify({
-            message: "Increment download counter",
-            content: updatedContent,
-            sha: data.sha
-        })
-    });
-}
-</script>
-
